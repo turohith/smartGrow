@@ -1,16 +1,42 @@
-# This is a sample Python script.
+import tkinter as tk
+from tkinter import ttk
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+versionNumber = 0.1
+titleText = "smartGrow v"
+window_width = 320
+window_height = 240
+
+#STRINGS AND THINGS
+splashScreenText = f"SmartGrow v{versionNumber}"
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
+root = tk.Tk()
+root.title(f"{titleText}{versionNumber}")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+#button function
+def button_clicked():
+    message.config(text='Button Pressed')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#get screen dimensions
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+#find center point
+center_x = int(screen_width/2 - window_width/2)
+center_y = int(screen_height/2 - window_height/2)
+
+root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+root.resizable(False, False)
+root.overrideredirect(True)
+
+message = ttk.Label(root)
+message['text'] = f"{splashScreenText}"
+message.pack()
+
+button = ttk.Button(root, text='Click Me', command=button_clicked)
+button.pack()
+
+#mainLoop (keeps window running)
+#needs to be the last statement, after creating widgets
+root.mainloop()
