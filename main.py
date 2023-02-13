@@ -1,42 +1,28 @@
 import tkinter as tk
 from tkinter import ttk
-
-versionNumber = 0.1
-titleText = "smartGrow v"
-window_width = 320
-window_height = 240
-
-#STRINGS AND THINGS
-splashScreenText = f"SmartGrow v{versionNumber}"
+from tkinter.messagebox import showinfo
 
 
+class App(tk.Tk):
+  def __init__(self):
+    super().__init__()
 
-root = tk.Tk()
-root.title(f"{titleText}{versionNumber}")
+    # configure the root window
+    self.title('My Awesome App')
+    self.geometry('300x50')
 
-#button function
-def button_clicked():
-    message.config(text='Button Pressed')
+    # label
+    self.label = ttk.Label(self, text='Hello, Tkinter!')
+    self.label.pack()
 
-#get screen dimensions
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+    # button
+    self.button = ttk.Button(self, text='Click Me')
+    self.button['command'] = self.button_clicked
+    self.button.pack()
 
-#find center point
-center_x = int(screen_width/2 - window_width/2)
-center_y = int(screen_height/2 - window_height/2)
+  def button_clicked(self):
+    showinfo(title='Information', message='Hello, Tkinter!')
 
-root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
-root.resizable(False, False)
-root.overrideredirect(True)
-
-message = ttk.Label(root)
-message['text'] = f"{splashScreenText}"
-message.pack()
-
-button = ttk.Button(root, text='Click Me', command=button_clicked)
-button.pack()
-
-#mainLoop (keeps window running)
-#needs to be the last statement, after creating widgets
-root.mainloop()
+if __name__ == "__main__":
+  app = App()
+  app.mainloop()
